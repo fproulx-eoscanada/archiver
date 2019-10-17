@@ -88,7 +88,7 @@ func (tzst *TarZstd) wrapReader() {
 	var zstdr *zstd.Decoder
 	tzst.Tar.readerWrapFn = func(r io.Reader) (io.Reader, error) {
 		var err error
-		zstdr, err = zstd.NewReader(r)
+		zstdr, err = zstd.NewReader(r, zstd.WithDecoderLowmem(false))
 		return zstdr, err
 	}
 	tzst.Tar.cleanupWrapFn = func() {

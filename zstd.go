@@ -25,7 +25,7 @@ func (zs *Zstd) Compress(in io.Reader, out io.Writer) error {
 
 // Decompress reads in, decompresses it, and writes it to out.
 func (zs *Zstd) Decompress(in io.Reader, out io.Writer) error {
-	r, err := zstd.NewReader(in)
+	r, err := zstd.NewReader(in, zstd.WithDecoderLowmem(false))
 	if err != nil {
 		return err
 	}
